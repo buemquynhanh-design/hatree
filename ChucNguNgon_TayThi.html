@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#f8dbe8">
+<title>Ngủ ngon nha Tây Thi 🌙</title>
+<style>
+:root{--pink:#ffd8e7;--rose:#d65f91}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;overflow-x:hidden;color:#fff8fc;font-family:Georgia,"Times New Roman",serif;background:linear-gradient(160deg,#191d46 0%,#42366d 42%,#b46f9d 78%,#f6bfd5 100%);display:grid;place-items:center;padding:22px}
+.sky{position:fixed;inset:0;overflow:hidden;pointer-events:none}
+.star{position:absolute;color:#fff7d6;animation:twinkle 2.5s infinite alternate}
+@keyframes twinkle{from{opacity:.25;transform:scale(.8)}to{opacity:1;transform:scale(1.2)}}
+.moon{position:fixed;right:9%;top:8%;font-size:clamp(48px,10vw,90px);filter:drop-shadow(0 0 22px #ffe6a8);animation:moonfloat 5s ease-in-out infinite}
+@keyframes moonfloat{50%{transform:translateY(-10px)}}
+.card{width:min(620px,100%);position:relative;text-align:center;padding:clamp(26px,6vw,48px) clamp(18px,6vw,46px);border:1px solid #ffffff70;border-radius:28px;background:linear-gradient(145deg,#ffffff20,#ffffff0a);box-shadow:0 18px 70px #0b102c66;backdrop-filter:blur(8px)}
+.kicker{font:12px/1.6 system-ui,sans-serif;letter-spacing:5px;text-transform:uppercase;color:#ffe5f0}
+h1{font-size:clamp(35px,8vw,57px);font-weight:normal;line-height:1.15;margin:16px 0;color:#fff2f8;text-shadow:0 0 22px #ffb7d9}
+.name{color:#ffd2e5;font-style:italic}
+.divider{width:95px;height:1px;background:#ffe3ee;margin:24px auto;opacity:.85}
+.message{font-size:clamp(16px,3.5vw,20px);line-height:1.9;margin:0 auto;max-width:440px}
+.signature{font-size:22px;color:#ffe0ed;margin-top:24px}
+.bear{font-size:54px;margin:16px 0 6px;filter:drop-shadow(0 5px 12px #1b143c70)}
+.controls{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:24px}
+button{font:600 14px system-ui,sans-serif;border:1px solid #ffffff85;border-radius:999px;padding:12px 18px;color:#65344f;background:#ffe8f1;cursor:pointer;box-shadow:0 5px 18px #1b143c35}
+button.secondary{background:#ffffff15;color:white}
+.hint{font:12px/1.6 system-ui,sans-serif;color:#ffe7f0;opacity:.9;margin-top:16px}
+.music-frame{width:min(100%,420px);margin:18px auto 0;border-radius:14px;overflow:hidden;display:none}
+.music-frame.show{display:block}
+.music-frame iframe{display:block;width:100%;aspect-ratio:16/9;border:0}
+.heart{position:fixed;bottom:-35px;pointer-events:none;animation:rise linear forwards;filter:drop-shadow(0 0 7px #ffb9d7)}
+@keyframes rise{0%{transform:translateY(0) rotate(0);opacity:0}12%{opacity:.95}100%{transform:translateY(-115vh) rotate(35deg);opacity:0}}
+footer{font:12px system-ui,sans-serif;color:#ffeaf3;opacity:.8;margin-top:22px}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important}}
+</style>
+</head>
+<body>
+<div class="sky" id="sky"></div>
+<div class="moon" aria-hidden="true">☾</div>
+<main class="card">
+  <div class="kicker">Một lời nhắn trước khi ngủ</div>
+  <h1>Ngủ ngon nha,<br><span class="name">Tây Thi</span> 💗</h1>
+  <div class="divider"></div>
+  <p class="message">
+    Hôm nay em đã vất vả rồi.<br>
+    Bây giờ hãy gác lại những điều làm em mệt,<br>
+    nhắm mắt thật nhẹ và để những giấc mơ<br>
+    dịu dàng ôm em vào lòng nhé. 🌷<br><br>
+    Dù hôm nay thế nào, mong em luôn nhớ rằng<br>
+    em xứng đáng được yêu thương,<br>
+    được bình yên và có một giấc ngủ thật ngon.
+  </p>
+  <div class="bear">🧸🌙</div>
+  <div class="signature">Chúc công chúa mơ đẹp ♡</div>
+  <div class="controls">
+    <button id="musicBtn">▶ Phát nhạc “Dấu Yêu” – Eren</button>
+    <button class="secondary" id="heartBtn">♡ Gửi Tây Thi thật nhiều tim</button>
+  </div>
+  <div class="music-frame" id="musicFrame">
+    <iframe id="player" title="Dấu Yêu - Eren" src="https://www.youtube-nocookie.com/embed/1WWyl212hRc?playsinline=1&rel=0" allow="autoplay; encrypted-media; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  </div>
+  <p class="hint" id="musicHint">Bấm “Phát nhạc” rồi nhấn nút ▶ trong trình phát nếu cần. Trình duyệt không cho tự phát tiếng khi chưa có thao tác của m.</p>
+  <footer>Đêm nay, mong mọi điều dịu dàng tìm đến em ✨</footer>
+</main>
+<script>
+for(let i=0;i<65;i++){
+  const s=document.createElement('span');
+  s.className='star';s.textContent=Math.random()>.5?'✦':'·';
+  s.style.left=Math.random()*100+'%';s.style.top=Math.random()*100+'%';
+  s.style.fontSize=(8+Math.random()*15)+'px';
+  s.style.animationDelay=(Math.random()*3)+'s';
+  document.getElementById('sky').appendChild(s);
+}
+function makeHeart(){
+  const h=document.createElement('span');h.className='heart';
+  h.textContent=['♡','♥','💗','💕'][Math.floor(Math.random()*4)];
+  h.style.left=Math.random()*100+'vw';h.style.fontSize=(16+Math.random()*26)+'px';
+  h.style.animationDuration=(5+Math.random()*5)+'s';
+  document.body.appendChild(h);setTimeout(()=>h.remove(),11000);
+}
+setInterval(makeHeart,900);
+document.getElementById('heartBtn').addEventListener('click',()=>{
+  for(let i=0;i<45;i++)setTimeout(makeHeart,i*45);
+});
+const frame=document.getElementById('musicFrame');
+const btn=document.getElementById('musicBtn');
+btn.addEventListener('click',()=>{
+  frame.classList.add('show');
+  btn.textContent='♫ Trình phát nhạc đã mở';
+  document.getElementById('musicHint').textContent='Nếu nhạc chưa chạy, hãy nhấn ▶ trên video. Nếu bị chặn trong trình duyệt tích hợp, mở file bằng Safari hoặc mở bài hát trên YouTube.';
+});
+</script>
+</body>
+</html>
